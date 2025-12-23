@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { LucideMessageSquareWarning } from "lucide-react";
 import React, { cloneElement } from "react";
@@ -5,7 +6,7 @@ import React, { cloneElement } from "react";
 type PlaceholderProps = {
     label: string;
     icon?: React.ReactElement<React.SVGProps<SVGElement>, "svg">;
-    button?: React.ReactElement<any>;
+    button?: React.ReactElement<any>
 };
 
 const Placeholder = ({
