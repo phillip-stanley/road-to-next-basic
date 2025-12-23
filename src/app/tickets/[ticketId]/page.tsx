@@ -1,6 +1,10 @@
 import Link from 'next/link';
 
+import Placeholder from '@/components/placeholder';
+import { Button } from '@/components/ui/button';
 import initialTickets from "@/data";
+import TicketItem from "@/features/ticket/components/ticket-item";
+import { ticketsPath } from "@/paths";
 
 interface TicketPageProps {
     params: Promise<{
@@ -14,15 +18,22 @@ const TicketsPage = async ({ params }: TicketPageProps) => {
     const ticket = initialTickets.find((ticket) => ticket.id === ticketId);
 
     if (!ticket) {
-        return <h2>No tickets founds</h2>
+        return (
+            <Placeholder
+                label="No ticket found"
+                button={
+                    <Button asChild variant="outline">
+                        <Link href={ticketsPath()}>Go to Tickets</Link>
+                    </Button>
+                }
+            >
+            </Placeholder>
+        )
     }
 
     return (
-        <div className="page">
-            <h2 className="text-3xl mb-5">{ticket.title}</h2>
-            <p className="text-sm mb-10">{ticket.content}</p>
-
-            <Link href="/tickets" className="text-sm underline">Back</Link>
+        <div className="flex justify-center animate-fade-from-top">
+            <TicketItem ticket={ticket} isDetail />
         </div>
     )
 }
